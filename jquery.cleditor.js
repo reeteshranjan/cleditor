@@ -1102,7 +1102,7 @@
 
                     // Resize the toolbar
                     var hgt = $group.offset().top + $group.outerHeight() -
-                        $toolbar.offset().top + 1;
+                        $toolbar.offset().top;
                     $toolbar.height(hgt);
 
                     // Resize the iframe
