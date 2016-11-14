@@ -971,11 +971,17 @@
             .hide()
             .appendTo($main);
 
-        editor.$frame[0].onload = (function($frame, editor) {
+        var waitHandle = setInterval((function($frame, editor) {
             return function() {
                 // Load the iframe document content
-                var contentWindow = $frame[0].contentWindow,
-                    doc = editor.doc = contentWindow.document,
+                var contentWindow = $frame[0].contentWindow
+
+                if(!contentWindow) return
+
+                clearInterval(waitHandle)
+                waitHandle = null
+
+                var doc = editor.doc = contentWindow.document,
                 $doc = $(doc);
 
                 doc.open();
@@ -1122,7 +1128,7 @@
 
                 });
             }
-        })($frame, editor)
+        })($frame, editor), 100)
 
     }
 
